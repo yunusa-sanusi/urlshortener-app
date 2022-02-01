@@ -1,0 +1,14 @@
+{% extends './base.html' %}
+{% block content %}
+{% if urls %}
+{% for url in urls %}
+<div>
+  <p>Long Url -> {{ url.long_url }}</p>
+  <p>Short Url -> <a href={{ url.long_url }}>{{ url.short_url }}</a></p>
+</div>
+{% endfor %}
+{% else %}
+<p>No URLs yet</p>
+{% endif %}
+<a href="{% url 'create-short-url' %}">Shorten URL</a>
+{% endblock content %}
