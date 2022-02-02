@@ -17,7 +17,7 @@
 <body>
   <nav class="navbar navbar-dark bg-dark py-3">
     <div class="container">
-      <a href="{% url 'home' %}" class="navbar-brand">URL SHORTENER</a>
+      <a href="{% url 'home' %}" class="navbar-brand">Byte.ly</a>
       {% if not request.user.is_authenticated %}
       <div class="d-flex">
         <a href="{% url 'login' %}" class="btn btn-secondary me-2">Login</a>
