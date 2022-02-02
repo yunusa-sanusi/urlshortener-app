@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -7,6 +8,7 @@ from .models import Shortener
 from .utils import get_short_url
 
 
+@login_required(login_url='login')
 def home(request):
     urls = Shortener.objects.filter(user=request.user)
     site = get_current_site(request)
