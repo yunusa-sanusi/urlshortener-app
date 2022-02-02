@@ -1,14 +1,40 @@
 {% extends './base.html' %}
 {% block content %}
-{% if urls %}
-{% for url in urls %}
-<div>
-  <p>Long Url -> {{ url.long_url }}</p>
-  <p>Short Url -> <a href={{ url.long_url }}>{{ url.short_url }}</a></p>
-</div>
-{% endfor %}
-{% else %}
-<p>No URLs yet</p>
-{% endif %}
-<a href="{% url 'create-short-url' %}">Shorten URL</a>
+<section class="container d-flex flex-column justify-content-center">
+  <form action="" method="post" class="row w-100 mb-3 mt-5 mx-auto">
+    {% csrf_token %}
+    <div class="col-10">
+      {{ form.long_url }}
+    </div>
+    <div class="col-2">
+      <button type="submit" class="ml-3 btn btn-primary btn-lg">Shorten</button>
+    </div>
+    </div>
+  </form>
+  <div class="url-table w-100">
+    <h1 class="display-5 mt-3 mb-3">My URLs</h1>
+    {% if urls %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col px-3">#</th>
+          <th scope="col">Main URL</th>
+          <th scope="col">Shortened URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for url in urls %}
+        <tr>
+          <td>{{ url.id }}</td>
+          <td>{{ url.long_url }}</td>
+          <td><a href="{% url 'short_url' url.short_url %}">{{ site }}/{{ url.short_url }}</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p>No URLs yet</p>
+    {% endif %}
+  </div>
+</section>
 {% endblock content %}
